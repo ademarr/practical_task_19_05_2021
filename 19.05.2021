@@ -1,0 +1,80 @@
+<?php
+
+// Здоровье человека не может быть больше 100!
+class Person
+{
+    private $name; 
+    private $lastname;
+    private $age;
+    private $hp;
+    private $mother;
+    private $father;
+
+    function  __construct($name, $lastname, $age, $mother = null, $father = null) // конструктор, вводим данные
+    {
+        $this->name = $name;
+        $this->lastname = $lastname;
+        $this->age = $age;
+        $this->mother = $mother;
+        $this->father = $father;
+        $this->hp = 100;
+    }
+    function getName()
+    {
+        return $this->name;
+    }
+    function getLastname()
+    {
+        return $this->lastname;
+    }
+    function getAge()
+    {
+        return $this->age;
+    }
+    function getMother()
+    {
+        return $this->mother;
+    }
+    function getFather()
+    {
+        return $this->father;
+    }
+    function getInfo() {
+        return "
+        <h3>Несколько слов обо мне</h3><br>"."
+        Моё имя: ".$this->getName()."<br>
+        Моя фамилия: ".$this->getLastname()."<br>
+        Мой возраст: ".$this->getAge()."<br><br>
+        Имя папы: ".$this->getFather()->getName()."<br>
+        Фамилия папы: ".$this->getFather()->getLastname()."<br>
+        Возраст папы: ".$this->getFather()->getAge()."<br><br>
+        Имя мамы: ".$this->getMother()->getName()."<br>
+        Фамилия мамы: ".$this->getMother()->getLastname()."<br>
+        Возраст мамы: ".$this->getMother()->getAge()."<br><br>
+        Имя моей бабушки по маме: ".$this->getMother()->getMother()->getName()."<br>
+        Фамилия бабушки по маме: ".$this->getMother()->getMother()->getLastname()."<br>
+        Возраст бабушки по маме: ".$this->getMother()->getMother()->getAge()."<br><br>
+        Имя моей бабушки по папе: ".$this->getFather()->getMother()->getName()."<br>
+        Фамилия бабушки по папе: ".$this->getFather()->getMother()->getLastname()."<br>
+        Возраст бабушки по папе: ".$this->getFather()->getMother()->getAge()."<br><br>
+        Имя моего дедушки по маме: ".$this->getMother()->getFather()->getName()."<br>
+        Фамилия дедушки по маме: ".$this->getMother()->getFather()->getLastname()."<br>
+        Возраст дедушки по маме: ".$this->getMother()->getFather()->getAge()."<br><br>
+        Имя моего дедушки по папе: ".$this->getFather()->getFather()->getName()."<br>
+        Фамилия дедушки по папе: ".$this->getFather()->getFather()->getLastname()."<br>
+        Возраст дедушки по папе: ".$this->getFather()->getFather()->getAge()."<br>
+        ";
+    }
+}
+$sergey = new Person("Sergey", "Ivanov", 86);
+$elena = new Person("Elena", "Sidorova", 80);
+$igor = new Person("Igor", "Petrov", 70);
+$vera = new Person("Vera", "Petrova", 70); 
+$alex = new Person("Alex", "Ivanov", 42, $elena, $sergey);
+$olga = new Person("Olga", "Ivanova", 42, $vera, $igor);
+$valera = new Person("Valera", "Ivanov", 15, $olga, $alex);
+
+echo $valera->getInfo();
+
+?>
+<!-- Создать 2 бабушки, 2 дедушки. Бабушки и дедушки это по линии матери будет дед и бабка и по линии отца были дед и бабка. Задание у сына вывести на экран информацию о всей родне -->
